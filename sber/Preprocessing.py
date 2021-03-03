@@ -1,3 +1,5 @@
+import pandas as pd 
+
 class Prerpocessing:
     def __init__(self, events):
 

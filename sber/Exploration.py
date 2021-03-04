@@ -2,55 +2,52 @@ import matplotlib.pyplot as plt
 
 
 class Exploration:
-    """
-    Class used for the first exploration in dataframe,
-    get some information and visualise it
-    """
-
     def __init__(self, events):
         self.events = events.copy()
 
-    def plot_registered_after(self):
+    def plot_something(self, 
+                       title_, 
+                       xlabel_, 
+                       ylabel_, 
+                       series, 
+                       color="#607c8e"):
         """
-        It should plot graph  of registred after column
+        Common funcion for plot histogramm
         """
 
-        self.events.registered_after.plot.hist(
-            grid=True, bins=20, rwidth=0.9, color="#607c8e"
-        )
-        plt.title("Histogramm registred after")
-        plt.xlabel("Time spent")
-        plt.ylabel("Value counts")
+        series.plot.hist(grid=True, 
+                         bins=20,
+                         rwidth=0.9, 
+                         color=color)
+        plt.title(title_)
+        plt.xlabel(xlabel_)
+        plt.ylabel(ylabel_)
 
         return plt.grid(axis="y", alpha=0.75)
+
+    def plot_registered_after(self):
+
+        return self.plot_something(
+            title_="Histogramm registred after",
+            xlabel_="Time spent",
+            ylabel_="Value counts",
+            series=self.events.registered_after,
+        )
 
     def plot_week_number(self):
-        """
-        It should plot graph  of week number column
-        """
 
-        self.events.week_number.plot.hist(
-            grid=True, bins=20, rwidth=0.9, color="#607c8e"
+        return self.plot_something(
+            title_="Histogramm week number",
+            xlabel_="Number week",
+            ylabel_="User count",
+            series=self.events.week_number,
         )
-        plt.title("Histogramm week number")
-        plt.xlabel("Number week")
-        plt.ylabel("User count")
 
-        return plt.grid(axis="y", alpha=0.75)
+    def plot_visits_number(self):
 
-    def get_count_uniq_users(self, dict_) -> str:
-
-        """
-        dict of uniq users -> stats
-        get some relationship between lenght of uniq users
-        and all users
-        """
-
-        len_ = len(dict_)
-        relationship = round((len_ / len(self.events)) * 100)
-
-        print(
-            f"Count of uniq users = {len_}",
-            f"it's {relationship}% of dataset",
-            sep="\n",
+        return self.plot_something(
+            title_="Histogramm visits number",
+            xlabel_="Number visits",
+            ylabel_="User count",
+            series=self.events.visits_number,
         )
